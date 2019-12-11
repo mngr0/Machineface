@@ -47,14 +47,6 @@ ColumnLayout {
         }
 
         HalLed {
-            id: activeLed
-            name: "active"
-            onColor: "orange"
-            Layout.preferredHeight: tempSetLabel.height * 0.9
-            Layout.preferredWidth: tempSetLabel.height * 0.9
-        }
-
-        HalLed {
             id: inTempRangeLed
             name: "temp.in-range"
             onColor: "green"
@@ -70,6 +62,8 @@ ColumnLayout {
             Layout.preferredWidth: tempSetLabel.height * 0.9
         }
     }
+
+
 
     HalPin {
         id: maxTemperaturePin
@@ -90,6 +84,12 @@ ColumnLayout {
         name: "temp.standby"
         direction: HalPin.In
         type: HalPin.Float
+    }
+    HalPin {
+        id: active
+        name: "active"
+        direction: HalPin.IO
+        type: HalPin.Bit
     }
 
     HalGauge {
@@ -163,24 +163,16 @@ ColumnLayout {
 
         Switch {
             id: onOffSwitch
-            enabled: errorLed.value === false
+            enabled: active.value
             onCheckedChanged: {
-                if (checked) {
-                    if (tempSetSpin.value == 0) {
-                        tempSetSpin.value = standbyTemperaturePin.value
-                    }
-                }
-                else {
-                    tempSetSpin.value = 0
-                }
+              active.value=checked
             }
 
             Binding {
                 target: onOffSwitch
                 property: "checked"
-                value: tempSetSpin.value > 0.0
+                value: active.value > 0.0
             }
         }
     }
 }
-
