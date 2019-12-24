@@ -163,16 +163,12 @@ ColumnLayout {
 
         Switch {
             id: onOffSwitch
-            enabled: active.value
+            enabled: true
+            checked: active.value
             onCheckedChanged: {
               active.value=checked
             }
 
-            Binding {
-                target: onOffSwitch
-                property: "checked"
-                value: active.value > 0.0
-            }
         }
     }
 }
