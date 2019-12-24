@@ -162,8 +162,8 @@ ApplicationItem {
                     anchors.bottom: parent.bottom
                     width: parent.height * 0.2
                     height: width
-                    axis: -1
-                    axisName: "All"
+                    axis: 3 
+                    axisName: "A"
                     color: "white"
                     fontSize: root.fontSize
                 }

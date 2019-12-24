@@ -167,6 +167,7 @@ ColumnLayout {
             checked: active.value
             onCheckedChanged: {
               active.value=checked
+              //console.log((checked)
             }
 
         }
